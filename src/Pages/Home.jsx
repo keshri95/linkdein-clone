@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../components/common/Loader";
 
 export default function Home() {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     let navigate = useNavigate()
 
     useEffect(() => {
