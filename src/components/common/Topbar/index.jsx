@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./index.scss";
 import linkdeinLogo from "../../../assets/link.png";
 
@@ -12,16 +12,30 @@ import {
 import { BsBriefcase } from "react-icons/bs";
 import user from "../../../assets/user.png";
 import { useNavigate } from "react-router-dom";
+import ProfilePopup from "../ProfilePopup";
 
 export default function Topbar() {
   let navigate = useNavigate();
+  const [popupVisible, setPopupVisible] = useState(false);
+
 
   const goTo = (route) => {
     navigate(route);
   };
 
+  const displayPopup = () => {
+    setPopupVisible(!popupVisible);
+  };
+
   return (
     <div className="topbar-main">
+       {popupVisible ? (
+        <div className="popup-position">
+          <ProfilePopup />
+        </div>
+      ) : (
+        <></>
+      )}
       <img src={linkdeinLogo} alt="logo" className="linkdein-logo" />
       <div className="react-icons">
         <AiOutlineHome
@@ -59,7 +73,7 @@ export default function Topbar() {
         src={user}
         className="user-logo"
         alt="user"
-        onClick={() => goTo("/")}
+        onClick={displayPopup}
       />
     </div>
   );
