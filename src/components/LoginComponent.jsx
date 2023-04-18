@@ -13,8 +13,9 @@ export default function LoginComponent() {
   const login = async () => {
     try{
       let res = await LoginAPI(credentials.email, credentials.password);
-      console.log(res?.user);
       toast.success('Signed in to Linkdein')
+      console.log(res.user.email);
+      localStorage.setItem('userEmail', res.user.email)
       navigate("/home")
 
     } catch (err){

@@ -5,16 +5,19 @@ import LinkdeinLogo from "../assets/link.png"
 import GoogleButton from "react-google-button";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { postUserData } from "../api/FirestoreAPI";
 
 export default function RegisterComponent(){
     const [credentials, setCredentials] = useState({});
     let navigate = useNavigate()
   
-    const login = async () => {
+    const register = async () => {
       try{
         let res = await RegisterAPI(credentials.email, credentials.password);
-        console.log(res?.user);
+        console.log(res);
         toast.success('Account Created!')
+        postUserData({name: credentials.name, email: credentials.email})
+        localStorage.setItem('userEmail', res.user.email)
         navigate("/home")
       } catch (err){
         console.log(err);
@@ -62,7 +65,7 @@ export default function RegisterComponent(){
           placeholder="Password (6 or more characters)"
         />
       </div>
-      <button onClick={login} className="login-btn">
+      <button onClick={register} className="login-btn">
         Agree & Join
       </button>
     </div>
