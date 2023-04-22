@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "../Sass/LoginComponent.scss";
-import { LoginAPI, GoogleSignInAPI, RegisterAPI } from "../api/AuthAPI";
+import { GoogleSignInAPI, RegisterAPI } from "../api/AuthAPI";
 import LinkdeinLogo from "../assets/link.png"
 import GoogleButton from "react-google-button";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { postUserData } from "../api/FirestoreAPI";
+import { getUniqueID } from "../helpers/getUniqueId"
 
 export default function RegisterComponent(){
     const [credentials, setCredentials] = useState({});
@@ -14,13 +15,18 @@ export default function RegisterComponent(){
     const register = async () => {
       try{
         let res = await RegisterAPI(credentials.email, credentials.password);
-        console.log(res);
+        // console.log(res);
         toast.success('Account Created!')
-        postUserData({name: credentials.name, email: credentials.email})
+        postUserData({
+          name: credentials.name, 
+          email: credentials.email,
+          userID: getUniqueID(),
+        })
         localStorage.setItem('userEmail', res.user.email)
         navigate("/home")
+
       } catch (err){
-        console.log(err);
+        // console.log(err);
         toast.error("Connot create your Account");
       }
   

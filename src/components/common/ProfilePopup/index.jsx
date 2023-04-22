@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { onLogout } from "../../../api/AuthAPI";
 import { getCurrentUser } from "../../../api/FirestoreAPI";
 import "./index.scss";
+import Button from "../Button";
 
 export default function ProfilePopup() {
   let navigate = useNavigate();
@@ -12,16 +13,19 @@ export default function ProfilePopup() {
   }, []);
   return (
     <div className="popup-card">
-      {/* <p className="name">{currentUser?.name}</p>
-      <p className="headline">{currentUser?.headline}</p> */}
-      <ul className="popup-option">
-        <li className="popup-option" onClick={() => navigate("/profile")}>
-          Profile
-        </li>
-        <li className="popup-option" onClick={onLogout}>
-          Logout
-        </li>
-      </ul>
-    </div>
+      <p className="name">{currentUser?.name}</p>
+      <p className="headline">{currentUser?.headline}</p>
+      <Button
+        title="View Profile"
+        onClick={() =>
+          navigate("/profile", {
+            state: {
+              id: currentUser?.id,
+            },
+          })
+        }
+      />
+      <Button title="Log out" onClick={onLogout} />
+  </div>
   );
 }
