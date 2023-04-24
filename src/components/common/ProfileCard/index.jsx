@@ -1,15 +1,27 @@
-import React, {useState, useMemo} from 'react'
+import React, {useState, useMemo, useEffect} from 'react'
 import "./index.scss";
-import { getSingleUser, getSingleStatus, getStatus } from '../../../api/FirestoreAPI';
+import { getSingleUser, getSingleStatus, getStatus,editProfile } from '../../../api/FirestoreAPI';
 import PostCard from '../PostCard';
 import { useLocation } from 'react-router-dom';
 import {FaBeer} from "react-icons/fa"
 import {HiOutlinePencil} from "react-icons/hi"
+import { uploadImage as uploadImageAPI } from '../../../api/ImageUpload';
 
-export default function ProfileCard({currentUser, onEdit}) {
+export default function ProfileCard({currentUser,onEdit}) {
   let location = useLocation()
   const [allStatus, setAllStatus] = useState([]);
   const [currentProfile, setCurrentProfile] = useState({})
+  const [currentImage, setCurrentImage]  = useState({})
+  const [imageLink, setImageLink] = useState('')
+
+  const getImage =(event) => {
+    setCurrentImage(event.target.files[0])
+  }
+
+  const uploadImage = () => {
+    uploadImageAPI(currentImage, currentUser.id)
+  }
+
 
   
   useMemo(() => {
@@ -24,20 +36,27 @@ export default function ProfileCard({currentUser, onEdit}) {
     getStatus(setAllStatus) // this should not be here 
   }, []);
 
+  // console.log(currentUser)  // id
+  /*
+  useEffect(() => {
+    editProfile(currentUser?.userID, imageLink)
+  },[imageLink])
+
+  */
 
   return (
     <>
    
     <div className="profile-card">
-
+    <input type={"file"} onChange={getImage} />
+    <button onClick={uploadImage}>Upload</button>
     <div className='edit-btn'>
         <HiOutlinePencil className='edit-icon' onClick={onEdit} />
-        {/* <button onClick={onEdit}>Edit</button> */}
       </div>
 
       <div className="profile-info">
         <div>
-          
+          <img className='profile-image' src={currentUser?.imageLink} alt="profile-image" />
           <h3 className="userName">
             {Object.values(currentProfile).length === 0
               ? currentUser.name

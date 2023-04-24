@@ -1,79 +1,102 @@
 import React, { useMemo, useState } from 'react'
 import "./index.scss";
 import {AiOutlineLike, AiFillLike, AiOutlineComment} from "react-icons/ai"
-import { getLikesByUser, likePost, postComment } from '../../../api/FirestoreAPI';
+import { getLikesByUser, likePost, postComment, getComments } from '../../../api/FirestoreAPI';
 import {getCurrentTimeStamp } from "../../../helpers/useMoment"
 
-export default function LikeButton({ userId, postId }) {
+export default function LikeButton({ userId, postId, currentUser }) {
 
 
-    const [likesCount, setLikesCount]  = useState(0)
-    const [liked, setLiked] = useState(false)
-    const [showCommentBox, setShowCommentBox] = useState(false)
-    const [comment, setComment] = useState('')
+  const [likesCount, setLikesCount] = useState(0);
+  const [showCommentBox, setShowCommentBox] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
 
-    const  handleLike = () => {
-        likePost(userId, postId, liked)
-    }
+  const handleLike = () => {
+    likePost(userId, postId, liked);
+  };
 
-    const getComment = (event) => {
-      setComment(event.target.value)
-    }
 
-    const addComment = () => {
-      postComment(postId, comment, getCurrentTimeStamp('LLL'))
-        setComment('')
-    }
+  const getComment = (event) => {
+    setComment(event.target.value);
+  };
 
-    useMemo(() => {
 
-      getLikesByUser(userId, postId, setLiked, setLikesCount)
+  const addComment = () => {
+    postComment(postId, comment, getCurrentTimeStamp("LLL"), currentUser?.name);
+    setComment("");
+  };
 
-    }, [userId, postId])
+  useMemo(() => {
+    getLikesByUser(userId, postId, setLiked, setLikesCount);
+    getComments(postId, setComments);
+  }, [userId, postId]);
 
   return (
-    <div className='like-container' onClick={handleLike}> 
-
-      <p> {likesCount} People Like this Post </p> 
-
-        <div className='hr-line'>
-          <hr />
-        </div>
-
-      <div className='like-comment' >
-
-      <div className='likes-comment-inner' onClick={handleLike}>
-       { 
-        liked ? (
-          <AiFillLike size={30} 
-            color='#0072b1' /> 
-        ): (
-         <AiOutlineLike size={30} />
-         )}
-
-          <p className={liked ? "blue":"black"}>Like</p>
-      </div>
-
-
-      <div className='likes-comment-inner' onClick={() => setShowCommentBox(true)}>
-          <AiOutlineComment size={30} color={showCommentBox ? "0072b1" : "#212121"} /> 
-          <p className={showCommentBox ? "blue":"black"}>Comment</p>
-      </div>
-
+    <div className="like-container">
+    <p>{likesCount} People Like this Post</p>
+    <div className="hr-line">
+      <hr />
     </div>
-      {showCommentBox ?  (<>
-        <input placeholder='Add a Comment' className='comment-input' onChange={getComment}
-        name='comment'
-        value={comment}
+    <div className="like-comment">
+      <div className="likes-comment-inner" onClick={handleLike}>
+        {liked ? (
+          <AiOutlineLike size={30} color="#0a66c2" />
+        ) : (
+          <AiFillLike size={30} />
+        )}
+
+        <p className={liked ? "blue" : "black"}>Like</p>
+      </div>
+      <div
+        className="likes-comment-inner"
+        onClick={() => setShowCommentBox(!showCommentBox)}
+      >
+        {
+          <AiOutlineComment
+            size={30}
+            color={showCommentBox ? "#0a66c2" : "#212121"}
+          />
+        }
+
+        <p className={showCommentBox ? "blue" : "black"}>Comments</p>
+      </div>
+    </div>
+    {showCommentBox ? (
+      <>
+        <input
+          onChange={getComment}
+          placeholder="Add a Comment"
+          className="comment-input"
+          name="comment"
+          value={comment}
         />
-        <button className='add-a-comment-btn' onClick={addComment}>Add a Comment</button>
-        </>):
-        (
-          <>
+        <button className="add-comment-btn" onClick={addComment}>
+          Add Comment
+        </button>
 
-          </>
-        )  
-      }
-    </div>
+        {comments.length > 0 ? (
+          comments.map((comment) => {
+            return (
+              <div className="all-comments">
+                <p className="name">{comment.name}</p>
+                <p className="comment">{comment.comment}</p>
+
+                <p className="timestamp">{comment.timeStamp}</p>
+                {/* 
+                <p>•</p>
+                 */}
+              </div>
+            );
+          })
+        ) : (
+          <></>
+        )}
+      </>
+    ) : (
+      <></>
+    )}
+  </div>
   )
 }
