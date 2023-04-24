@@ -28,7 +28,7 @@ export default function PostCard({ posts, id }) {
     <p className="timestamp">{posts.timeStamp}</p>
     <p className="status">{posts.status}</p>
 
-    <LikeButton userId={currentUser?.userID} postId={posts.id} />
+    <LikeButton userId={currentUser?.userID} postId={posts.id} currentUser={currentUser} />
   </div>
   );
 }

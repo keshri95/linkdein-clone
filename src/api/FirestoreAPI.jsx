@@ -71,7 +71,7 @@ export const getCurrentUser = (setCurrentUser) => {
     onSnapshot(userRef, (response) => {
         setCurrentUser(
             response.docs.map((docs) => {
-                return {  ...docs.data(), userID: docs.id };
+                return {  ...docs.data(), userID: docs.id };    // return { ...docs.data(), id: docs.id };
             }).filter((item) => {
                 return item.email === localStorage.getItem('userEmail')
             })[0]
@@ -169,15 +169,36 @@ export const getSingleUser = (setCurrentUser, email) => {
 
   // comment on the post
 
-  export const postComment = (postId, comment, timeStamp) => {
+  export const postComment = (postId, comment, timeStamp, name) => {
     try{
       addDoc(commentsRef, {
-        postId, comment, timeStamp,
+        postId, 
+        comment, 
+        timeStamp,
+        name,
       })  
     }  
-    
-
      catch(err) {
       console.log(err)
     }
   }
+
+  //  show the comments on the posts========
+  export const getComments = (postId, setComments) => {
+    try {
+      let singlePostQuery = query(commentsRef, where("postId", "==", postId));
+  
+      onSnapshot(singlePostQuery, (response) => {
+        const comments = response.docs.map((doc) => {
+          return {
+            id: doc.id,
+            ...doc.data(),
+          };
+        });
+  
+        setComments(comments);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
