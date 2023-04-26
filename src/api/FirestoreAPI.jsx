@@ -202,3 +202,32 @@ export const getSingleUser = (setCurrentUser, email) => {
       console.log(err);
     }
   };
+
+
+// update the posts =============
+
+export const updatePost = (id,status) =>{
+  let docToUpdate = doc(postsRef, id)
+  try{
+    updateDoc(docToUpdate, { status })
+    toast.success("Post has been updated successfully");
+
+  } catch(err){
+    console.log(err)
+  }
+}
+
+
+// delete the post ==========================
+
+export const deletePost = (id) => {
+  let docToDelete = doc(postsRef, id)
+
+  try{
+    deleteDoc(docToDelete)
+    toast.success("Post has been deleted successfully");
+  }catch(err){
+    console.log(err)
+    
+  }
+}

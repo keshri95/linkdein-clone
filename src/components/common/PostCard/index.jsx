@@ -2,9 +2,10 @@ import React, { useMemo, useState } from "react";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
 import LikeButton from "../LikeButton";
-import { getAllUsers, getCurrentUser } from "../../../api/FirestoreAPI";
+import { BsPencil, BsTrash  } from "react-icons/bs"
+import { deletePost, getAllUsers, getCurrentUser } from "../../../api/FirestoreAPI";
 
-export default function PostCard({ posts, id }) {
+export default function PostCard({ posts, id, getEditData }) {
   let navigate = useNavigate();
 
   const [currentUser, setCurrentUser] = useState({});
@@ -15,16 +16,40 @@ export default function PostCard({ posts, id }) {
     getAllUsers(setAllUsers);
   }, []);
 
+
+
+  // console.log(allUsers.filter((user) => user.id === posts.userID)[0])
+
+  /*
   console.log(
     allUsers
       .filter((item) => item.id === posts.userID)
       .map((item) => item.imageLink)[0]
   );
+  */
 
   // console.log(currentUser?.userID) // id
   return (
     <div className="posts-card" key={id}>
       <div className="post-image-wrapper">
+
+        {currentUser.id === posts.userID ? (<div className="action-container">
+            <BsPencil
+              size={20}
+              className="action-icon"
+              onClick={() => getEditData(posts)}
+            />
+            <BsTrash
+              size={20}
+              className="action-icon"
+              onClick={() => deletePost(posts.id)}
+            />
+          </div>) : (
+            <>
+            </>
+          )
+          }
+
         <img
           className="post-image"
           src={
@@ -44,8 +69,13 @@ export default function PostCard({ posts, id }) {
               })
             }
           >
-            {posts.userName}
+            {allUsers.filter((user) => user.id === posts.userID)[0]?.name}
           </p>
+
+          <p className="headline">
+          {allUsers.filter((user) => user.id === posts.userID)[0]?.headline}
+            </p>
+
           <p className="timestamp">{posts.timeStamp}</p>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Modal } from "antd";
 import "./index.scss";
 
-export default function ModalComponent({ modalOpen, setModalOpen, setStatus, status, sendStatus }) {
+export default function ModalComponent({ modalOpen, setModalOpen, setStatus, status, sendStatus, isEdit, updateStatus }) {
 
 
 
@@ -12,16 +12,22 @@ export default function ModalComponent({ modalOpen, setModalOpen, setStatus, sta
         title="Create a post"
         centered
         open={modalOpen}
-        onOk={() => setModalOpen(false)}
-        onCancel={() => setModalOpen(false)}
+        onOk={() => {
+          setStatus("")
+          setModalOpen(false)
+        }}
+        onCancel={() => {
+          setStatus("")
+          setModalOpen(false)
+        }}
         footer={[
           <Button
             key="submit"
             type="primary"
             disabled={status.length > 0 ? false : true }
-            onClick={sendStatus}
+            onClick={isEdit ? updateStatus :  sendStatus}
           >
-            Post
+            {isEdit ? "Update" : "Post"}
           </Button>,
         ]}
       >
