@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { onLogout } from "../../../api/AuthAPI";
 import { getCurrentUser } from "../../../api/FirestoreAPI";
-import "./index.scss";
 import Button from "../Button";
+import "./index.scss";
 
 export default function ProfilePopup() {
   let navigate = useNavigate();
@@ -26,6 +26,6 @@ export default function ProfilePopup() {
         }
       />
       <Button title="Log out" onClick={onLogout} />
-  </div>
+    </div>
   );
 }

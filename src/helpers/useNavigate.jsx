@@ -1,10 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
-export default function useNavigate(){
- 
-    let instance = useNavigate()
-    
-    const navigate = (param) => {
-        instance(param)
-    }
-}
+let instance = useNavigate();
+
+export const navigate = (param) => {
+  instance(param);
+};

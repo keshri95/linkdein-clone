@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import "./index.scss";
+import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 import { editProfile } from "../../../api/FirestoreAPI";
-import { AiOutlineClose } from "react-icons/ai"
+import "./index.scss";
 
 export default function ProfileEdit({ onEdit, currentUser }) {
-
   const [editInputs, setEditInputs] = useState(currentUser);
   const getInput = (event) => {
     let { name, value } = event.target;
@@ -13,7 +12,7 @@ export default function ProfileEdit({ onEdit, currentUser }) {
   };
 
   const updateProfileData = async () => {
-    await editProfile(currentUser?.userID, editInputs);
+    await editProfile(currentUser?.id, editInputs);
     await onEdit();
   };
 

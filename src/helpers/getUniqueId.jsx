@@ -1,7 +1,7 @@
-import uuid from "react-uuid"
+import uuid from "react-uuid";
 
 export const getUniqueID = () => {
-    let id = uuid()
+  let id = uuid();
 
-    return id
-}
+  return id;
+};

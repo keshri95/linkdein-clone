@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+// import React from "react";
 import { Button, Modal, Progress } from "antd";
 import "./index.scss";
 
@@ -11,8 +10,6 @@ export default function FileUploadModal({
   currentImage,
   progress,
 }) {
-  console.log(currentImage.name);
-
   return (
     <div>
       <Modal
@@ -28,15 +25,15 @@ export default function FileUploadModal({
             type="primary"
             onClick={uploadImage}
           >
-            Submit
+            Upload Profile Picture
           </Button>,
         ]}
       >
         <div className="image-upload-main">
           <p>{currentImage.name}</p>
-
-          <label htmlFor="image-upload">Add an Image</label>
-
+          <label className="upload-btn" for="image-upload">
+            Add an Image
+          </label>
           {progress === 0 ? (
             <></>
           ) : (
@@ -44,8 +41,7 @@ export default function FileUploadModal({
               <Progress type="circle" percent={progress} />
             </div>
           )}
-
-          <input hidden type={"file"} id="image-upload" onChange={getImage} />
+          <input hidden id="image-upload" type={"file"} onChange={getImage} />
         </div>
       </Modal>
     </div>

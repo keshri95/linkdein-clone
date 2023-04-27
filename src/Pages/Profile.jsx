@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import ProfileComponent from '../components/ProfileComponent'
-import Loader from '../components/common/Loader'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../firebaseConfig'
-import { useNavigate } from 'react-router-dom'
 
-export default function Profile({ currentUser} ) {
+import ProfileComponent from "../components/ProfileComponent";
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../firebaseConfig";
+import Loader from "../components/common/Loader";
+import { useEffect, useState } from "react";
 
-  const [loading, setLoading] = useState(true)
+export default function Profile({ currentUser }) {
+  const [loading, setLoading] = useState(true);
   let navigate = useNavigate();
-  
   useEffect(() => {
     onAuthStateChanged(auth, (res) => {
-        // console.log(res?.accessToken)
-    if(!res?.accessToken){
-        navigate("/")
-      } else{
-        // return <Loader />
-        setLoading(false)
+      if (!res?.accessToken) {
+        navigate("/");
+      } else {
+        setLoading(false);
       }
-    })
-  }, [])
-
-  return loading ? <Loader /> : <ProfileComponent currentUser={currentUser} />
+    });
+  }, []);
+  return loading ? <Loader /> : <ProfileComponent currentUser={currentUser} />;
 }
