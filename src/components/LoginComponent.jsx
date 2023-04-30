@@ -35,7 +35,7 @@ export default function LoginComponent() {
             }
             type="email"
             className="common-input"
-            placeholder="Email or Phone"
+            placeholder="Email"
           />
           <input
             onChange={(event) =>

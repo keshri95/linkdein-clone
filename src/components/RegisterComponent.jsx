@@ -51,7 +51,7 @@ export default function RegisterComponent() {
             }
             type="email"
             className="common-input"
-            placeholder="Email or phone number"
+            placeholder="Your Email "
           />
           <input
             onChange={(event) =>
