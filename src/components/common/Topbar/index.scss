@@ -4,7 +4,7 @@
   background-color: rgba(255, 255, 255, 0.87);
   display: flex;
   align-items: center;
-}
+}  
 .linkedin-logo {
   width: 65px;
   margin-left: 20px;
@@ -52,6 +52,7 @@
   background-color: white;
   border-radius: 10px;
   border: 1px solid #bbbbbb;
+  z-index: 100;
 
   .search-inner {
     display: flex;
@@ -75,5 +76,80 @@
 
   .search-inner:hover {
     background-color: #bbbbbb;
+  }
+}
+
+
+// responsive
+
+@media screen and (max-width: 320px) {
+
+  .search-results {
+    position: absolute;
+    left: 100px;
+    top: 60px;
+    width: auto;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #bbbbbb;
+
+  }
+
+  .react-icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+    margin-left: 1rem;
+  }
+  
+}
+
+@media screen and (max-width: 375px) {
+
+  .search-results {
+    position: absolute;
+    left: 100px;
+    top: 60px;
+    width: auto;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #bbbbbb;
+
+  }
+
+  .search-results {
+    position: absolute;
+    left: 100px;
+    top: 60px;
+    width: auto;
+    height: auto;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #bbbbbb;
+
+  }
+
+  .react-icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 47%;
+    margin-left: 1.9rem;
+  }
+  
+}
+
+
+@media screen and (max-width: 500px) {
+
+  .topbar-main{
+    width: 100% !important;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0.87);
+    display: flex;
+    align-items: center;
   }
 }

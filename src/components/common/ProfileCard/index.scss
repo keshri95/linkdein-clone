@@ -2,10 +2,11 @@
   width: auto;
   height: auto;
   background-color: whitesmoke;
-  margin: 30px;
+  margin: 1.9rem;
   border-radius: 5px;
   padding: 20px;
   position: relative;
+  z-index: 10;
   .profile-info {
     display: flex;
     justify-content: space-between;
@@ -62,12 +63,12 @@
     font-family: system-ui;
     color: rgba(0, 0, 0, 0.9);
     font-weight: 600;
-    font-size: 24px;
-    margin-top: 10px;
+    font-size: 1.5rem;
+    margin-top: 0.8rem;
   }
 
   .heading {
-    margin-top: -25px;
+    margin-top: -1.2rem;
     font-family: system-ui;
     font-size: 16px;
     font-weight: 400;
@@ -75,4 +76,183 @@
     width: 320px;
     line-height: 20px;
   }
+}
+
+// responsvie --------
+@media screen and (max-width: 320px) {
+  .profile-card {
+    width: auto;
+    height: auto;
+    background-color: whitesmoke;
+    margin: 1.8rem;
+    border-radius: 5px;
+    padding: 1.5rem;
+    position: relative;
+  z-index: 10;
+
+
+    .profile-info {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      // align-items: center;
+
+      .profile-image {
+        width: auto;
+        height: 200px;
+        object-fit: contain;
+        border-radius: 50%;
+        border: 2px solid #cacaca;
+        padding: 5px;
+        cursor: pointer;
+      }
+
+      .right-info {
+        // margin-top: 25px !important;
+        // margin-right: 20px !important;
+        .college,
+        .company {
+          font-family: system-ui;
+          color: rgba(0, 0, 0, 0.9);
+          font-size: 0.8rem;
+          font-weight: 600;
+          line-height: 30px;
+        }
+
+        .company {
+          margin-top: -1rem;
+        }
+      }
+    }
+
+    .website {
+      color: #004c75 !important;
+      -webkit-link: #004c75;
+    }
+    .skill-label {
+      font-weight: 600;
+    }
+    .edit-btn {
+      position: absolute;
+      right: 20px;
+
+      .edit-icon {
+        cursor: pointer;
+        padding: 10px;
+      }
+
+      .edit-icon:hover {
+        background-color: rgb(197, 197, 197);
+        padding: 10px;
+        border-radius: 50%;
+      }
+    }
+    .userName {
+      font-family: system-ui;
+      color: rgba(0, 0, 0, 0.9);
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin-top: 10px;
+    }
+
+    .heading {
+      margin-top: -1.2rem;
+      font-family: system-ui;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.9);
+      width: auto;
+      line-height: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  .profile-card {
+    width: auto;
+    height: auto;
+    background-color: whitesmoke;
+    margin: 1.8rem;
+    border-radius: 5px;
+    padding: 1.5rem;
+    position: relative;
+  z-index: 10;
+
+
+    .profile-info {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      // align-items: center;
+
+      .profile-image {
+        width: auto;
+        height: 200px;
+        object-fit: contain;
+        border-radius: 50%;
+        border: 2px solid #cacaca;
+        padding: 5px;
+        cursor: pointer;
+      }
+
+      .right-info {
+        // margin-top: 25px !important;
+        // margin-right: 20px !important;
+        .college,
+        .company {
+          font-family: system-ui;
+          color: rgba(0, 0, 0, 0.9);
+          font-size: 0.8rem;
+          font-weight: 600;
+          line-height: 30px;
+        }
+
+        .company {
+          margin-top: -1rem;
+        }
+      }
+    }
+
+    .website {
+      color: #004c75 !important;
+      -webkit-link: #004c75;
+    }
+    .skill-label {
+      font-weight: 600;
+    }
+    .edit-btn {
+      position: absolute;
+      right: 20px;
+
+      .edit-icon {
+        cursor: pointer;
+        padding: 10px;
+      }
+
+      .edit-icon:hover {
+        background-color: rgb(197, 197, 197);
+        padding: 10px;
+        border-radius: 50%;
+      }
+    }
+    .userName {
+      font-family: system-ui;
+      color: rgba(0, 0, 0, 0.9);
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin-top: 10px;
+    }
+
+    .heading {
+      margin-top: -1.2rem;
+      font-family: system-ui;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.9);
+      width: auto;
+      line-height: 20px;
+    }
+  }
+
 }

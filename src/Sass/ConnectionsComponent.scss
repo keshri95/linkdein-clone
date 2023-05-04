@@ -71,3 +71,56 @@
     }
   }
 }
+
+
+// responsive --------
+
+@media screen and (max-width: 320px) {
+
+  .connections-main{
+
+    display: grid;
+    grid-template-columns: auto;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+    margin: 2rem;
+    border: 1px solid #bbbbbb;
+    background-color: white;
+    border-radius: 10px;
+
+
+    .grid-child {
+      border: 1px solid #bbbbbb;
+      width:auto;
+      height: auto;
+      margin: 0.8rem;
+      padding: 0.8rem;
+      display: flex;
+
+    }
+  }
+    
+}
+
+@media screen and (max-width: 500px) {
+
+  .connections-main{
+
+    display: grid;
+    grid-template-columns: auto;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+    margin: 2rem;
+    border: 1px solid #bbbbbb;
+    background-color: white;
+    border-radius: 10px;
+
+  }
+    
+}
