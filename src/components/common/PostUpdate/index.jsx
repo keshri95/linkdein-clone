@@ -32,14 +32,16 @@ export default function PostStatus({ currentUser }) {
   };
 
   const getEditData = (posts) => {
+    console.log(posts?.postID)
     setModalOpen(true);
     setStatus(posts?.status);
     setCurrentPost(posts);
     setIsEdit(true);
+
   };
 
   const updateStatus = () => {
-    updatePost(currentPost.id, status, postImage);
+    updatePost(currentPost?.id, status, postImage);
     setModalOpen(false);
   };
 
@@ -87,9 +89,9 @@ export default function PostStatus({ currentUser }) {
       />
 
       <div>
-        {allStatuses.map((posts) => {
+        {allStatuses?.map((posts) => {
           return (
-            <div key={posts.id}>
+            <div key={posts?.id}>
               <PostsCard posts={posts} getEditData={getEditData} />
             </div>
           );

@@ -20,7 +20,7 @@ export default function FileUploadModal({
         onCancel={() => setModalOpen(false)}
         footer={[
           <Button
-            disabled={currentImage.name ? false : true}
+            disabled={currentImage?.name ? false : true}
             key="submit"
             type="primary"
             onClick={uploadImage}

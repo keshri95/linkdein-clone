@@ -11,35 +11,37 @@ import {
 import LikeButton from "../LikeButton";
 import "./index.scss";
 
-export default function PostsCard({ posts, id, getEditData }) {
+export default function PostsCard({posts, id, getEditData}) {
   let navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState({});
   const [allUsers, setAllUsers] = useState([]);
   const [imageModal, setImageModal] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
+
+  console.log(posts)
   useMemo(() => {
     getCurrentUser(setCurrentUser);
     getAllUsers(setAllUsers);
   }, []);
 
   useEffect(() => {
-    getConnections(currentUser.id, posts.userID, setIsConnected);
-  }, [currentUser.id, posts.userID]);
+    getConnections(currentUser?.id, posts?.userID, setIsConnected);
+  }, [currentUser?.id, posts?.userID]);
 
-  return isConnected || currentUser.id === posts.userID ? (
+  return isConnected || currentUser?.id === posts?.userID ? (
     <div className="posts-card" key={id}>
       <div className="post-image-wrapper">
-        {currentUser.id === posts.userID ? (
+        {currentUser?.id === posts?.userID ? (
           <div className="action-container">
             <BsPencil
               size={20}
               className="action-icon"
-              onClick={() => getEditData(posts)}
+              onClick={() => getEditData(posts)} // TypeError -> getEditData not func
             />
             <BsTrash
               size={20}
               className="action-icon"
-              onClick={() => deletePost(posts.id)}
+              onClick={() => deletePost(posts?.id)}
             />
           </div>
         ) : (
@@ -51,8 +53,8 @@ export default function PostsCard({ posts, id, getEditData }) {
           className="profile-image"
           src={
             allUsers
-              .filter((item) => item.id === posts.userID)
-              .map((item) => item.imageLink)[0]
+              .filter((item) => item?.id === posts?.userID)
+              .map((item) => item?.imageLink)[0]
           }
         />
         <div>
@@ -60,22 +62,22 @@ export default function PostsCard({ posts, id, getEditData }) {
             className="name"
             onClick={() =>
               navigate("/profile", {
-                state: { id: posts?.userID, email: posts.userEmail },
+                state: { id: posts?.userID, email: posts?.userEmail },
               })
             }
           >
-            {allUsers.filter((user) => user.id === posts.userID)[0]?.name}
+            {allUsers.filter((user) => user?.id === posts?.userID)[0]?.name}
           </p>
           <p className="headline">
-            {allUsers.filter((user) => user.id === posts.userID)[0]?.headline}
+            {allUsers.filter((user) => user?.id === posts?.userID)[0]?.headline}
           </p>
-          <p className="timestamp">{posts.timeStamp}</p>
+          <p className="timestamp">{posts?.timeStamp}</p>
         </div>
       </div>
-      {posts.postImage ? (
+      {posts?.postImage ? (
         <img
           onClick={() => setImageModal(true)}
-          src={posts.postImage}
+          src={posts?.postImage}
           className="post-image"
           alt="post-image"
         />
@@ -89,7 +91,7 @@ export default function PostsCard({ posts, id, getEditData }) {
 
       <LikeButton
         userId={currentUser?.id}
-        postId={posts.id}
+        postId={posts?.id}
         currentUser={currentUser}
       />
 
@@ -102,7 +104,7 @@ export default function PostsCard({ posts, id, getEditData }) {
       >
         <img
           onClick={() => setImageModal(true)}
-          src={posts.postImage}
+          src={posts?.postImage}
           className="post-image modal"
           alt="post-image"
         />

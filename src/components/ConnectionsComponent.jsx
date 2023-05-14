@@ -6,7 +6,7 @@ import "../Sass/ConnectionsComponent.scss";
 export default function ConnectionsComponent({ currentUser }) {
   const [users, setUsers] = useState([]);
   const getCurrentUser = (id) => {
-    addConnection(currentUser.id, id);
+    addConnection(currentUser?.id, id);
   };
   useEffect(() => {
     getAllUsers(setUsers);
@@ -14,8 +14,8 @@ export default function ConnectionsComponent({ currentUser }) {
 
   return users.length > 1 ? (
     <div className="connections-main">
-      {users.map((user) => {
-        return user.id === currentUser.id ? (
+      {users?.map((user) => {
+        return user?.id === currentUser?.id ? (
           <></>
         ) : (
           <ConnectedUsers

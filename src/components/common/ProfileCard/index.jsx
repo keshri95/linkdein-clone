@@ -49,7 +49,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
         progress={progress}
       />
       <div className="profile-card">
-        {currentUser.id === location?.state?.id ? (
+        {currentUser?.id === location?.state?.id ? (
           <div className="edit-btn">
             <HiOutlinePencil className="edit-icon" onClick={onEdit} />
           </div>
@@ -88,7 +88,7 @@ export default function ProfileCard({ onEdit, currentUser }) {
             ) : (
               <></>
             )}
-            {currentUser.website || currentProfile?.website ? (
+            {currentUser?.website || currentProfile?.website ? (
               <a
                 className="website"
                 target="_blank"

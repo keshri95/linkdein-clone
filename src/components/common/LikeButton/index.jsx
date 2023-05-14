@@ -75,13 +75,13 @@ export default function LikeButton({ userId, postId, currentUser }) {
           </button>
 
           {comments.length > 0 ? (
-            comments.map((comment) => {
+            comments?.map((comment) => {
               return (
                 <div className="all-comments">
-                  <p className="name">{comment.name}</p>
-                  <p className="comment">{comment.comment}</p>
+                  <p className="name">{comment?.name}</p>
+                  <p className="comment">{comment?.comment}</p>
 
-                  <p className="timestamp">{comment.timeStamp}</p>
+                  <p className="timestamp">{comment?.timeStamp}</p>
                   {/* 
                   <p>•</p>
                    */}

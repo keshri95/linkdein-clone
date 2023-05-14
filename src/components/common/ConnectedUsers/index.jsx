@@ -6,16 +6,16 @@ export default function ConnectedUsers({ user, getCurrentUser, currentUser }) {
   const [isConnected, setIsConnected] = useState(false);
   useEffect(() => {
     getConnections(currentUser.id, user.id, setIsConnected);
-  }, [currentUser.id, user.id]);
+  }, [currentUser?.id, user?.id]);
   return isConnected ? (
     <></>
   ) : (
     <div className="grid-child">
-      <img src={user.imageLink} />
-      <p className="name">{user.name}</p>
-      <p className="headline">{user.headline}</p>
+      <img src={user?.imageLink} />
+      <p className="name">{user?.name}</p>
+      <p className="headline">{user?.headline}</p>
 
-      <button onClick={() => getCurrentUser(user.id)}>
+      <button onClick={() => getCurrentUser(user?.id)}>
         <AiOutlineUsergroupAdd size={20} />
         Connect
       </button>
