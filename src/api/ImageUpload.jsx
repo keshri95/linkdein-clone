@@ -11,7 +11,7 @@ export const uploadImage = (
 ) => {
   const profilePicsRef = ref(storage, `profileImages/${file.name}`);
   const uploadTask = uploadBytesResumable(profilePicsRef, file);
-
+  
   uploadTask.on(
     "state_changed",
     (snapshot) => {
@@ -22,7 +22,7 @@ export const uploadImage = (
       setProgress(progress);
     },
     (error) => {
-      console.error(err);
+      console.error(error); // err
     },
     () => {
       getDownloadURL(uploadTask.snapshot.ref).then((response) => {
@@ -49,7 +49,7 @@ export const uploadPostImage = (file, setPostImage, setProgress) => {
       setProgress(progress);
     },
     (error) => {
-      console.error(err);
+      console.error(error);   // err
     },
     () => {
       getDownloadURL(uploadTask.snapshot.ref).then((response) => {

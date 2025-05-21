@@ -65,6 +65,9 @@ export default function Topbar({ currentUser }) {
   useEffect(() => {
     getAllUsers(setUsers);
   }, []);
+
+
+  console.log(filteredUsers)
   return (
     <div className="topbar-main">
       {popupVisible ? (
@@ -117,8 +120,10 @@ export default function Topbar({ currentUser }) {
           {filteredUsers.length === 0 ? (
             <div className="search-inner">No Results Found..</div>
           ) : (
-            filteredUsers.map((user) => (
-              <div className="search-inner" onClick={() => openUser(user)}>
+            filteredUsers.map((user, id) => (
+              <div className="search-inner"
+                key={user.id} 
+                onClick={() => openUser(user)}>
                 <img src={user.imageLink} />
                 <p className="name">{user.name}</p>
               </div>

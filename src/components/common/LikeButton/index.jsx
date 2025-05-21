@@ -75,9 +75,10 @@ export default function LikeButton({ userId, postId, currentUser }) {
           </button>
 
           {comments.length > 0 ? (
-            comments?.map((comment) => {
+            comments?.map((comment, id) => {
+              // console.log(comment, id)
               return (
-                <div className="all-comments">
+                <div className="all-comments" key={comment?.id}>
                   <p className="name">{comment?.name}</p>
                   <p className="comment">{comment?.comment}</p>
 
